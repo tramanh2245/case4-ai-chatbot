@@ -55,7 +55,7 @@ graph TB
             CHAT_R["ChatMessageRepository"]
         end
 
-        DB[("H2 In-Memory DB")]
+        DB[("SQLite DB\nbe/data/chatbot.db")]
     end
 
     GEMINI["🤖 Gemini 1.5 Flash API\nGoogle Cloud"]
@@ -117,7 +117,7 @@ sequenceDiagram
     participant TC as TodoController
     participant TSvc as TodoService
     participant TR as TodoRepository
-    participant DB as H2 DB
+    participant DB as SQLite DB
 
     U->>DF: tap folder icon (📁+)
     DF->>TS: onAddTask() callback
@@ -157,7 +157,7 @@ sequenceDiagram
     participant TSvc as TodoService
     participant TR as TodoRepository
     participant HR as TaskHistoryRepository
-    participant DB as H2 DB
+    participant DB as SQLite DB
 
     U->>TC_W: tap circle check ✓
     TC_W->>TP: completeTodo(id)
@@ -220,7 +220,7 @@ sequenceDiagram
     participant CSvc as ChatbotService
     participant GEM as Gemini API
     participant CR as ChatMessageRepository
-    participant DB as H2 DB
+    participant DB as SQLite DB
 
     U->>CS: gõ tin nhắn → send
     CS->>CS: _send() → _msgCtrl.text
@@ -427,7 +427,7 @@ classDiagram
 
 | Phần | Vấn đề | Gợi ý fix |
 |------|--------|-----------|
-| **H2 in-memory** | Mất data khi restart server | Dùng H2 file-based hoặc SQLite |
+| **SQLite** ✅ | Data lưu vĩnh viễn tại `be/data/chatbot.db` | Đã migrate từ H2 sang SQLite |
 | **TodoProvider.loadAll()** | Gọi lại toàn bộ sau mỗi action (add/complete/delete) | Cập nhật local state thay vì refetch |
 | **API key hardcode** | Key trong `application.properties` | Dùng env var khi deploy |
 | **No error UI** | Lỗi mạng chỉ log, không hiện cho user | Thêm error banner/snackbar |
