@@ -1,0 +1,19 @@
+# Database files
+be/data/
+
+# Secret configs
+be/src/main/resources/application-local.properties
+
+# Build outputs
+be/target/
+fe/build/
+fe/.dart_tool/
+fe/.flutter-plugins-dependencies
+
+# IDE
+.idea/
+*.iml
+
+# Android local
+fe/android/local.properties
+fe/android/.gradle/
